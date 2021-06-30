@@ -92,7 +92,10 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
     const getGroup = (branch = {}, groups = {}) => {
       var groupName = 'ungrouped';
       for (let group of groups) {
-        if (group['includedBranches'].includes(branch['gitBranchName'])) {
+        if (
+          group['includedBranches'].includes(branch['gitBranchName']) ||
+          group['includedBranches'].includes(branch['urlSlug'])
+        ) {
           groupName = group['groupLabel'];
         }
       }
@@ -109,6 +112,8 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
 
     return newGroupMapping;
   };
+
+  console.log(groupBranches(branches, groups));
 
   const generatePrefix = (version) => {
     // Manual is a special case because it does not use a path prefix (found at root of docs.mongodb.com)
