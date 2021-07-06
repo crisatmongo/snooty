@@ -70,7 +70,7 @@ const createVersionLabel = (gitBranchName = '', urlSlug = null) => {
 
 const getActiveUngroupedGitBranchNames = (branches, groups) => {
   // for each group, concatenate it group["branches"]
-  const groupedGitBranchNames = groups.map((g) => g['groupGitBranchNames']).flat();
+  const groupedGitBranchNames = groups.map((g) => g['includedBranches']).flat();
   const ungroupedActiveGitBranches = branches.filter(
     (b) => !groupedGitBranchNames.includes(b['gitBranchName']) && b['active'] === true
   );
@@ -116,7 +116,7 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
     if (optionValue === 'legacy') {
       return getLegacyProjectURL(project);
     }
-    return normalizePath(`${generatePrefix(optionValue)}/${slug}`);
+    return normalizePath(`${slug}/${generatePrefix(optionValue)}`);
   };
 
   // Used exclusively by the LG Select component's onChange function, which receives
@@ -145,7 +145,7 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
       const branchValue = branch['urlSlug'] || branch['gitBranchName'];
       const url = getUrl(branchValue);
       return (
-        <Option key={branchValue} value={branchValue}>
+        <Option key={branchValue} value={UIlabel}>
           <StyledOptionLink href={url}>{UIlabel}</StyledOptionLink>
         </Option>
       );
@@ -167,16 +167,18 @@ const VersionDropdown = ({ repo_branches: { branches, groups }, slug }) => {
       value={parserBranch}
       usePortal={false}
     >
+      {activeUngroupedGitBranchNames && mapBranchNamesToOptions(activeUngroupedGitBranchNames)}
       {groups &&
         groups.map((group) => {
-          const { groupLabel, groupGitBranchNames } = group;
+          const { groupLabel, includedBranches = [] } = group;
+          console.log(group);
+          console.log(groupLabel, includedBranches);
           return (
             <OptionGroup label={groupLabel}>
-              {groupGitBranchNames && mapBranchNamesToOptions(groupGitBranchNames)}
+              {includedBranches && mapBranchNamesToOptions(includedBranches)}
             </OptionGroup>
           );
         })}
-      {activeUngroupedGitBranchNames && mapBranchNamesToOptions(activeUngroupedGitBranchNames)}
       {needsLegacyDropdown(branches) && (
         <Option value="legacy">
           <StyledOptionLink href={getUrl('legacy')}>Legacy Docs</StyledOptionLink>
