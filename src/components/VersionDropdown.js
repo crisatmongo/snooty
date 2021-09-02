@@ -9,8 +9,6 @@ import { theme } from '../theme/docsTheme';
 import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { getLegacyProjectURL } from '../utils/get-legacy-project-url';
 import { normalizePath } from '../utils/normalize-path';
-import { theme } from '../theme/docsTheme';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const StyledSelect = styled(Select)`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -170,7 +168,6 @@ const VersionDropdown = ({ repoBranches: { branches, groups }, slug }) => {
       placeholder={'Select a version'}
       popoverZIndex={3}
       size={Size.Large}
-      popoverZIndex={3}
       value={parserBranch}
       usePortal={false}
     >

@@ -136,13 +136,15 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://university.mongodb.com/' },
 ];
 
-const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree }) => {
+const Sidenav = ({ page, pageTitle, repoBranches, siteTitle, slug, toctree }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSiteMetadata();
   const isDocsLanding = project === 'landing';
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
+  const showDocsLogo = process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile;
+  const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
   const [back, setBack] = React.useState(null);
@@ -214,7 +216,7 @@ const Sidenav = ({ page, pageTitle, publishedBranches, siteTitle, slug, toctree 
                 {siteTitle}
               </SideNavItem>
             )}
-            {publishedBranches && <VersionDropdown slug={slug} publishedBranches={publishedBranches} />}
+            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} />}
             {!ia && <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={toctree} />}
 
             {isDocsLanding && (
