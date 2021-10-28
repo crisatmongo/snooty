@@ -143,7 +143,6 @@ const Sidenav = ({ page, pageTitle, repoBranches, siteTitle, slug, toctree }) =>
   const { isTablet } = useScreenSize();
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= 420;
-  const showDocsLogo = process.env.GATSBY_FEATURE_FLAG_CONSISTENT_NAVIGATION && !isMobile;
   const showVersions = repoBranches?.branches?.length > 1;
 
   // Checks if user is navigating back to the homepage on docs landing
