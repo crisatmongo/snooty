@@ -7,7 +7,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-layout',
-    'gatsby-plugin-percy',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
