@@ -13,7 +13,7 @@ const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
 
 // Determines whether to use a standard query, or multi-property query for Percy snapshots
 const pageIdQuery = (pageIdPrefix) => {
-  return process.env.PERCY_BUILD ? { $regex: new RegExp(`^${pageIdPrefix}(/|$)`) } : constructPercyPageIdQuery();
+  return !!process.env.PERCY_BUILD ? constructPercyPageIdQuery() : { $regex: new RegExp(`^${pageIdPrefix}(/|$)`) };
 };
 
 module.exports = { constructBuildFilter };
