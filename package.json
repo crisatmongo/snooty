@@ -37,7 +37,7 @@
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .js,.jsx .",
     "lint:fix": "npm run lint -- --fix",
-    "percy": "npm run build:clean && PERCY_BUILD=true npm exec percy snapshot ./public",
+    "percy": "PERCY_BUILD=true npm run build:clean && npm exec percy snapshot ./public",
     "prepare": "husky install",
     "postversion": "git push origin v$npm_package_version && git push origin master",
     "prettier": "prettier '**/*.{js,jsx,json,md}' '!docs-tools/**'",
