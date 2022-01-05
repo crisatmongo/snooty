@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
+    "@emotion/css": "11.0.0-rc.0",
     "@emotion/styled": "^10.0.27",
     "@leafygreen-ui/badge": "^4.0.3",
     "@leafygreen-ui/banner": "^3.0.6",
@@ -112,8 +113,5 @@
     "sanitize-html": "^2.2.0",
     "styled-components": "^5.2.1",
     "theme-ui": "^0.10.0"
-  },
-  "peerDependencies": {
-    "@emotion/css": "^11.0.0-rc.0"
   }
 }
